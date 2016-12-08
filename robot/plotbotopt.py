@@ -11,4 +11,4 @@
 # Copyright (C) 2001-2002, by Peter I. Corke
 
 function o = plotbotopt
-	o = {'base' 'perspective' };
+	o = {'base' 'perspective' }

@@ -48,7 +48,7 @@ def jtraj(q0, q1, tv, qd0=None, qd1=None):
         tscal = float(1)
         t = mat(range(0,tv)).T/(tv-1.) # Normalized time from 0 -> 1
     else:
-        tv = arg2array(tv);
+        tv = arg2array(tv)
         tscal = float(max(tv))
         t = mat(tv).T / tscal
     
@@ -58,7 +58,7 @@ def jtraj(q0, q1, tv, qd0=None, qd1=None):
     if qd0 == None:
         qd0 = zeros((shape(q0)))
     else:
-        qd0 = arg2array(qd0);
+        qd0 = arg2array(qd0)
     if qd1 == None:
         qd1 = zeros((shape(q1)))
     else:
@@ -113,7 +113,7 @@ def ctraj(t0, t1, r):
         i = mat(range(1,r+1))
         r = (i-1.)/(r-1)
     else:
-        r = arg2array(r);
+        r = arg2array(r)
 
     if any(r>1) or any(r<0):
         raise 'path position values (R) must 0<=R<=1'

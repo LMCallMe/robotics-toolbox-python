@@ -1,5 +1,5 @@
 
-import robot.parsedemo as p;
+import robot.parsedemo as p
 import sys
 
 
@@ -20,18 +20,18 @@ if __name__ == '__main__':
 #
 # but a more direct approach is to use the function diff2tr()
 #
-    D = mat([.1, .2, 0, -.2, .1, .1]).T;
+    D = mat([.1, .2, 0, -.2, .1, .1]).T
     skew(D)
 pause % any key to continue
 #
 # More commonly it is useful to know how a differential motion in one 
 # coordinate frame appears in another frame.  If the second frame is 
 # represented by the transform
-    T = transl(100, 200, 300) * troty(pi/8) * trotz(-pi/4);
+    T = transl(100, 200, 300) * troty(pi/8) * trotz(-pi/4)
 #
 # then the differential motion in the second frame would be given by
 
-    DT = tr2jac(T) * D;
+    DT = tr2jac(T) * D
     DT.T
 #
 # tr2jac() has computed a 6x6 Jacobian matrix which transforms the differential 
@@ -40,7 +40,7 @@ pause % any key to continue
 pause % any key to continue
 
 # The manipulator's Jacobian matrix relates differential joint coordinate 
-# motion to differential Cartesian motion;
+# motion to differential Cartesian motion
 #
 # 	dX = J(q) dQ
 #
@@ -83,10 +83,10 @@ pause % any key to continue
 # joint velocity to achieve this.
 #
 # We demand pure translational motion in the X direction
-    vel = mat([1, 0, 0, 0, 0, 0]).T;
+    vel = mat([1, 0, 0, 0, 0, 0]).T
 
 # and "resolve" this into joint rates
-    qvel = Ji * vel;
+    qvel = Ji * vel
     qvel.T
 #
 #  This is an alternative strategy to computing a Cartesian trajectory 
@@ -152,4 +152,4 @@ pause % any key to continue
 #
 '''
 
-    p.parsedemo(s);
+    p.parsedemo(s)

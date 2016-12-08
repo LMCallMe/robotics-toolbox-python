@@ -387,7 +387,7 @@ def oa2r(o,a):
     """
     n = crossp(o, a)
     n = unit(n)
-    o = crossp(a, n);
+    o = crossp(a, n)
     o = unit(o).reshape(3,1)
     a = unit(a).reshape(3,1)
     return bmat('n o a')
@@ -435,7 +435,7 @@ def rotvec2r(theta, v):
 
     @see: L{rotx}, L{roty}, L{rotz}
     """
-    v = arg2array(v);
+    v = arg2array(v)
     ct = cos(theta)
     st = sin(theta)
     vt = 1-ct
@@ -527,36 +527,36 @@ def skew(*args):
         return  matrix([
             [0, -b[2],  b[1]],
             [b[2],  0,  -b[0]],
-            [-b[1], b[0],   0]]);
+            [-b[1], b[0],   0]])
 
     if len(args) == 1:
         # convert matrix to skew vector
-        b = args[0];
+        b = args[0]
         
         if isrot(b):
-            return 0.5*matrix( [b[2,1]-b[1,2], b[0,2]-b[2,0], b[1,0]-b[0,1]] );
+            return 0.5*matrix( [b[2,1]-b[1,2], b[0,2]-b[2,0], b[1,0]-b[0,1]] )
         elif ishomog(b):
-            return vstack( (b[0:3,3], 0.5*matrix( [b[2,1]-b[1,2], b[0,2]-b[2,0], b[1,0]-b[0,1]] ).T) );
+            return vstack( (b[0:3,3], 0.5*matrix( [b[2,1]-b[1,2], b[0,2]-b[2,0], b[1,0]-b[0,1]] ).T) )
 
     
     # build skew-symmetric matrix
           
-        b = arg2array(b);
+        b = arg2array(b)
         if len(b) == 3:
-            return ss(b);
+            return ss(b)
         elif len(b) == 6:
-            r = hstack( (ss(b[3:6]), mat(b[0:3]).T) );
-            r = vstack( (r, mat([0, 0, 0, 1])) );
-            return r;
+            r = hstack( (ss(b[3:6]), mat(b[0:3]).T) )
+            r = vstack( (r, mat([0, 0, 0, 1])) )
+            return r
             
     elif len(args) == 3:
             return ss(args);    
     elif len(args) == 6:
-            r = hstack( (ss(args[3:6]), mat(args[0:3]).T) );
-            r = vstack( (r, mat([0, 0, 0, 1])) );
+            r = hstack( (ss(args[3:6]), mat(args[0:3]).T) )
+            r = vstack( (r, mat([0, 0, 0, 1])) )
             return r;    
     else:
-        raise ValueError;
+        raise ValueError
 
 
 

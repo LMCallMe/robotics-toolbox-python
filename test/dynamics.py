@@ -4,7 +4,7 @@ from robot import *
 from robot.puma560akb import *
 from robot.puma560 import *
 
-set_printoptions(precision=4, suppress=True);
+set_printoptions(precision=4, suppress=True)
 
 tests = '''
 q1 = mat(ones((1,6)))
@@ -53,15 +53,15 @@ coriolis(p560, qn, 0.5*q1)
 # along trajectory
 (q,qd,qdd) = jtraj(qz, qr, 20)
 rne(p560, q, qd, qdd)
-''';
+'''
 
 for line in tests.split('\n'):
     if line == '' or line[0] in '%#':
-        continue;
-    print '::', line;
+        continue
+    print '::', line
     if ' = ' in line:
-        exec line;
+        exec line
     else:
-        print eval(line);
+        print eval(line)
     print
 

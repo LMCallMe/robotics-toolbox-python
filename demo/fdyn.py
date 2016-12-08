@@ -30,21 +30,21 @@ pause % any key to continue
 # To simulate the motion of the Puma 560 from rest in the zero angle pose 
 # with zero applied joint torques
     tic
-    [t q qd] = fdyn(nofriction(p560), 0, 10);
+    [t q qd] = fdyn(nofriction(p560), 0, 10)
     toc
 #
 # and the resulting motion can be plotted versus time
     subplot(3,1,1)
     plot(t,q(:,1))
-    xlabel('Time (s)');
+    xlabel('Time (s)')
     ylabel('Joint 1 (rad)')
     subplot(3,1,2)
     plot(t,q(:,2))
-    xlabel('Time (s)');
+    xlabel('Time (s)')
     ylabel('Joint 2 (rad)')
     subplot(3,1,3)
     plot(t,q(:,3))
-    xlabel('Time (s)');
+    xlabel('Time (s)')
     ylabel('Joint 3 (rad)')
 #
 # Clearly the robot is collapsing under gravity, but it is interesting to 

@@ -1,4 +1,4 @@
-import robot.parsedemo as p;
+import robot.parsedemo as p
 import sys
 
 print sys.modules
@@ -34,32 +34,32 @@ pause % any key to continue
     tau = rne(p560, q, qd, qdd); % compute inverse dynamics
 #
 #  Now the joint torques can be plotted as a function of time
-    plot(t, tau[:,0:2]);
-    xlabel('Time (s)');
-    ylabel('Joint torque (Nm)');
+    plot(t, tau[:,0:2])
+    xlabel('Time (s)')
+    ylabel('Joint torque (Nm)')
     show()
 
 #
 # Much of the torque on joints 2 and 3 of a Puma 560 (mounted conventionally) is
 # due to gravity.  That component can be computed using gravload()
-    clf();
-    taug = gravload(p560, q);
-    plot(t, taug[:,0:2]);
-    xlabel('Time (s)');
-    ylabel('Gravity torque (Nm)');
+    clf()
+    taug = gravload(p560, q)
+    plot(t, taug[:,0:2])
+    xlabel('Time (s)')
+    ylabel('Gravity torque (Nm)')
     show()
 
 # Now lets plot that as a fraction of the total torque required over the 
 # trajectory
-    clf();
-    subplot(2,1,1);
-    plot(t, hstack((tau[:,1], taug[:,1])));
-    xlabel('Time (s)');
-    ylabel('Torque on joint 2 (Nm)');
-    subplot(2,1,2);
-    plot(t, hstack((tau[:,2], taug[:,2])));
-    xlabel('Time (s)');
-    ylabel('Torque on joint 3 (Nm)');
+    clf()
+    subplot(2,1,1)
+    plot(t, hstack((tau[:,1], taug[:,1])))
+    xlabel('Time (s)')
+    ylabel('Torque on joint 2 (Nm)')
+    subplot(2,1,2)
+    plot(t, hstack((tau[:,2], taug[:,2])))
+    xlabel('Time (s)')
+    ylabel('Torque on joint 3 (Nm)')
 pause % any key to continue
 #
 # The inertia seen by the waist (joint 1) motor changes markedly with robot 
@@ -68,11 +68,11 @@ pause % any key to continue
 #
 #  Let's compute the variation in joint 1 inertia, that is M(1,1), as the 
 # manipulator moves along the trajectory (this may take a few seconds)
-    M = inertia(p560, q);
-    M11 = array([m[0,0] for m in M]);
-    clf();
-    plot(t, M11);
-    xlabel('Time (s)');
+    M = inertia(p560, q)
+    M11 = array([m[0,0] for m in M])
+    clf()
+    plot(t, M11)
+    xlabel('Time (s)')
     ylabel('Inertia on joint 1 (kgms2)')
 # Clearly the inertia seen by joint 1 varies considerably over this path.
 # This is one of many challenges to control design in robotics, achieving 
@@ -82,4 +82,4 @@ pause % any key to continue
 pause
 '''
 
-    p.parsedemo(s);
+    p.parsedemo(s)

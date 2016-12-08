@@ -38,12 +38,12 @@ L.append(Link(alpha=pi/2,  A=-0.0203, theta=0, D=.4331,   sigma=0, convention=2)
 L.append(Link(alpha=-pi/2, A=0,       theta=0, D=0,       sigma=0, convention=2))
 L.append(Link(alpha=pi/2,  A=0,       theta=0, D=0,       sigma=0, convention=2))
 
-L[0].m = 0;
-L[1].m = 17.4;
-L[2].m = 4.8;
-L[3].m = 0.82;
-L[4].m = 0.34;
-L[5].m = .09;
+L[0].m = 0
+L[1].m = 17.4
+L[2].m = 4.8
+L[3].m = 0.82
+L[4].m = 0.34
+L[5].m = .09
 
 #         rx      ry      rz
 L[0].r = mat([0,   0,	  0	])
@@ -61,19 +61,19 @@ L[3].I = mat([1.8e-3,  1.8e-3,   1.3e-3,     0,     0,	    0])
 L[4].I = mat([.3e-3,    .3e-3,    .4e-3,     0,     0,	    0])
 L[5].I = mat([.15e-3,   .15e-3,   .04e-3,    0,     0,	    0])
 
-L[0].Jm =  291e-6;
-L[1].Jm =  409e-6;
-L[2].Jm =  299e-6;
-L[3].Jm =  35e-6;
-L[4].Jm =  35e-6;
-L[5].Jm =  35e-6;
+L[0].Jm =  291e-6
+L[1].Jm =  409e-6
+L[2].Jm =  299e-6
+L[3].Jm =  35e-6
+L[4].Jm =  35e-6
+L[5].Jm =  35e-6
 
-L[0].G =  -62.6111;
-L[1].G =  107.815;
-L[2].G =  -53.7063;
-L[3].G =  76.0364;
-L[4].G =  71.923;
-L[5].G =  76.686;
+L[0].G =  -62.6111
+L[1].G =  107.815
+L[2].G =  -53.7063
+L[3].G =  76.0364
+L[4].G =  71.923
+L[5].G =  76.686
 
 # viscous friction (motor referenced)
 # unknown

@@ -138,7 +138,7 @@ class Link:
 
     def display(self):
 
-        print self;
+        print self
         print
 
         if self.m != None:
@@ -162,7 +162,7 @@ class Link:
         """
         Return copy of this Link
         """
-        return copy.copy(self);
+        return copy.copy(self)
 
     def friction(self, qd):
         """
@@ -202,12 +202,12 @@ class Link:
         l2.Tc = array([0, 0])
         if all:
             l2.B = 0
-        return l2;
+        return l2
 
 
 # methods to set kinematic or dynamic parameters
 
-    fields = ["alpha", "A", "theta", "D", "sigma", "offset", "m", "Jm", "G", "B", "convention"];
+    fields = ["alpha", "A", "theta", "D", "sigma", "offset", "m", "Jm", "G", "B", "convention"]
     
     def __setattr__(self, name, value):
         """
@@ -242,19 +242,19 @@ class Link:
         """
     
         if value == None:
-            self.__dict__[name] = value;
-            return;
+            self.__dict__[name] = value
+            return
             
         if name in self.fields:
             # scalar parameter
             if isinstance(value, (ndarray,matrix)) and value.shape != (1,1):
                 raise ValueError, "Scalar required"
             if not isinstance(value, (int,float,int32,float64)):
-                raise ValueError;
+                raise ValueError
             self.__dict__[name] = value
 
         elif name == "r":
-            r = arg2array(value);
+            r = arg2array(value)
             if len(r) != 3:
                 raise ValueError, "matrix required"
 
@@ -262,9 +262,9 @@ class Link:
             
         elif name == "I":
             if isinstance(value, matrix) and value.shape == (3,3):
-                self.__dict__[name] = value;
+                self.__dict__[name] = value
             else:
-                v = arg2array(value);
+                v = arg2array(value)
                 if len(v) == 3:
                     self.__dict__[name] = mat(diag(v))
                 elif len(v) == 6:
@@ -273,7 +273,7 @@ class Link:
                         [v[3],v[1],v[4]],
                         [v[5],v[4],v[2]]])
                 else:
-                    raise ValueError, "matrix required";
+                    raise ValueError, "matrix required"
 
         elif name == "Tc":
             v = arg2array(value)
@@ -283,12 +283,12 @@ class Link:
             elif len(v) == 2:
                 self.__dict__[name] = mat(v)
             else:
-                raise ValueError;
+                raise ValueError
 
         elif name == "qlim":
-            v = arg2array(value);
+            v = arg2array(value)
             if len(v) == 2:
-                self.__dict__[name] = mat(v);
+                self.__dict__[name] = mat(v)
             else:
                 raise ValueError
         else:
@@ -334,21 +334,21 @@ class Link:
         else:
             dn = q      # prismatic
 
-        sa = sin(self.alpha); ca = cos(self.alpha);
-        st = sin(theta); ct = cos(theta);
+        sa = sin(self.alpha); ca = cos(self.alpha)
+        st = sin(theta); ct = cos(theta)
 
         if self.convention == Link.LINK_DH:
             # standard
             t =   mat([[ ct,    -st*ca, st*sa,  an*ct],
                     [st,    ct*ca,  -ct*sa, an*st],
                     [0, sa, ca, dn],
-                    [0, 0,  0,  1]]);
+                    [0, 0,  0,  1]])
 
         else:
             # modified
             t =   mat([[ ct,    -st,    0,  an],
                 [st*ca, ct*ca,  -sa,    -sa*dn],
                 [st*sa, ct*sa,  ca, ca*dn],
-                [0, 0,  0,  1]]);
+                [0, 0,  0,  1]])
 
-        return t;
+        return t

@@ -109,7 +109,7 @@ def inertia(robot, q):
     n = robot.n
     q = mat(q)
     if numrows(q) > 1:
-        ilist = [];
+        ilist = []
         for row in q:
             I = rne(robot, ones((n, 1))*row, zeros((n,n)), eye(n), [[0],[0],[0]])
             ilist.append( I )
@@ -298,18 +298,18 @@ def rne(robot, *args, **options):
             error('inconsistant sizes of q, qd, qdd')
 
     # process options: gravity,  fext, debug
-    debug = 0;
-    gravity = robot.gravity;
+    debug = 0
+    gravity = robot.gravity
     fext = mat(zeros((6,1)))
     
     for k,v in options.items():
         if k == "gravity":
-            gravity = arg2array(v);
+            gravity = arg2array(v)
             if not isvec(gravity, 3):
                 error('gravity must be 3-vector')
             gravity = mat(gravity).T
         elif k == "fext":
-            fext = arg2array(v);
+            fext = arg2array(v)
             if not isvec(fext, 6):
                 error('fext must be 6-vector')
             fext = mat(fext).T

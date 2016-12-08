@@ -3,7 +3,7 @@
 from robot import *
 from robot.puma560 import *
 
-set_printoptions(precision=4, suppress=True);
+set_printoptions(precision=4, suppress=True)
 
 tests = """
 p560
@@ -20,15 +20,15 @@ qq = vstack((q, q, q, q))
 qq
 manipulability(p560, qq, 'yoshi')
 manipulability(p560, qq, 'asada')
-""";
+"""
 
 for line in tests.split('\n'):
     if line == '' or line[0] in '%#':
-        continue;
-    print '::', line;
+        continue
+    print '::', line
     if '=' in line:
-        exec line;
+        exec line
     else:
-        print eval(line);
+        print eval(line)
     print
 

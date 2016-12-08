@@ -3,7 +3,7 @@
 from robot import *
 from robot.puma560 import *
 
-set_printoptions(precision=4, suppress=True);
+set_printoptions(precision=4, suppress=True)
 
 tests = '''
 l = Link(1, 2, 3, 4, 0, Link.LINK_DH)
@@ -71,10 +71,10 @@ p560.showlinks()
 p560nf = p560.nofriction()
 p560nf.showlinks()
 
-p560.base = transl(1,2,3);
+p560.base = transl(1,2,3)
 p560.base
 
-p560.tool = transl(4,5,6);
+p560.tool = transl(4,5,6)
 p560.tool
 
 p560.gravity = [1,2,3]
@@ -82,15 +82,15 @@ p560.gravity
 
 
 
-''';
+'''
 
 for line in tests.split('\n'):
     if line == '' or line[0] in '%#':
-        continue;
-    print '::', line;
+        continue
+    print '::', line
     if '=' in line:
-        exec line;
+        exec line
     else:
-        print eval(line);
+        print eval(line)
     print
 

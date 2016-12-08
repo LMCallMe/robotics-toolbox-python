@@ -10,7 +10,7 @@
 # references, clarification of functions.
 #
 
-import robot.parsedemo as p;
+import robot.parsedemo as p
 import sys
 
 print sys.modules
@@ -45,7 +45,7 @@ pause % any key to continue
     (q, qd, qdd) = jtraj(qz, qr, t); % compute the joint coordinate trajectory
 #
 # then the homogeneous transform for each set of joint coordinates is given by
-    T = fkine(p560, q);
+    T = fkine(p560, q)
 
 #
 # where T is a list of matrices.
@@ -60,33 +60,33 @@ pause % any key to continue
 # Elements (0:2,3) correspond to the X, Y and Z coordinates respectively, and 
 # may be plotted against time
     x = array([e[0,3] for e in T])
-    y = array([e[1,3] for e in T]);
-    z = array([e[2,3] for e in T]);
-    subplot(3,1,1);
-    plot(t, x);
-    xlabel('Time (s)');
-    ylabel('X (m)');
-    subplot(3,1,2);
-    plot(t, y);
-    xlabel('Time (s)');
-    ylabel('Y (m)');
-    subplot(3,1,3);
-    plot(t, z);
-    xlabel('Time (s)');
-    ylabel('Z (m)');
+    y = array([e[1,3] for e in T])
+    z = array([e[2,3] for e in T])
+    subplot(3,1,1)
+    plot(t, x)
+    xlabel('Time (s)')
+    ylabel('X (m)')
+    subplot(3,1,2)
+    plot(t, y)
+    xlabel('Time (s)')
+    ylabel('Y (m)')
+    subplot(3,1,3)
+    plot(t, z)
+    xlabel('Time (s)')
+    ylabel('Z (m)')
     show()
 pause % any key to continue
 #
 # or we could plot X against Z to get some idea of the Cartesian path followed
 # by the manipulator.
 #
-    clf();
-    plot(x, z);
-    xlabel('X (m)');
-    ylabel('Z (m)');
-    grid();
+    clf()
+    plot(x, z)
+    xlabel('X (m)')
+    ylabel('Z (m)')
+    grid()
 pause % any key to continue
 echo off
 '''
 
-    p.parsedemo(s);
+    p.parsedemo(s)

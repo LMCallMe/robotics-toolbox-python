@@ -4,15 +4,15 @@ from robot import *
 
 tests = '''
 # utility
-v1 = mat([0, 1, 0]);
-v2 = mat([0, 0, 1]);
+v1 = mat([0, 1, 0])
+v2 = mat([0, 0, 1])
 unit(v1+v2)
 crossp(v1, v2)
 crossp(v1.T, v2)
 crossp(v1, v2.T)
 crossp(v1.T, v2.T)
 
-m = mat(zeros( (3,4) ));
+m = mat(zeros( (3,4) ))
 numcols(m)
 numrows(m)
 
@@ -94,15 +94,15 @@ skew(m)
 skew( mat([.1, .2 ,.3, .4, .5, .6]) )
 m = skew( mat([.1, .2 ,.3, .4, .5, .6]) )
 skew(m)
-''';
+'''
 
 for line in tests.split('\n'):
     if line == '' or line[0] in '%#':
-        continue;
-    print '::', line;
+        continue
+    print '::', line
     if '=' in line:
-        exec line;
+        exec line
     else:
-        print eval(line);
+        print eval(line)
     print
 

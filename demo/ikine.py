@@ -1,7 +1,7 @@
 # Copyright (C) 1993-2002, by Peter I. Corke
 
 
-import robot.parsedemo as p;
+import robot.parsedemo as p
 import sys
 
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
 #
 # First generate the transform corresponding to a particular joint coordinate,
     q = mat([0, -pi/4, -pi/4, 0, pi/8, 0])
-    T = fkine(p560, q);
+    T = fkine(p560, q)
 #
 # Now the inverse kinematic procedure for any specific robot can be derived 
 # symbolically and in general an efficient closed-form solution can be 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 # have several poses which result in the same transform for the last
 # link. The starting point for the first point may be specified, or else it
 # defaults to zero (which is not a particularly good choice in this case)
-    qi = ikine(p560, T);
+    qi = ikine(p560, T)
     qi.T
 #
 # Compared with the original value
@@ -45,8 +45,8 @@ pause % any key to continue
 # To examine the effect at a singularity lets repeat the last example but for a
 # different pose.  At the `ready' position two of the Puma's wrist axes are 
 # aligned resulting in the loss of one degree of freedom.
-    T = fkine(p560, qr);
-    qi = ikine(p560, T);
+    T = fkine(p560, qr)
+    qi = ikine(p560, T)
     qi.T
 #
 # which is not the same as the original joint angle
@@ -76,19 +76,19 @@ pause % any key to continue
 #
 # Let's examine the joint space trajectory that results in straightline 
 # Cartesian motion
-    subplot(3,1,1);
-    plot(t,q[:,1]);
-    xlabel('Time (s)');
-    ylabel('Joint 1 (rad)');
-    subplot(3,1,2);
-    plot(t,q[:,2]);
-    xlabel('Time (s)');
-    ylabel('Joint 2 (rad)');
-    subplot(3,1,3);
-    plot(t,q[:,3]);
-    xlabel('Time (s)');
-    ylabel('Joint 3 (rad)');
-    show();
+    subplot(3,1,1)
+    plot(t,q[:,1])
+    xlabel('Time (s)')
+    ylabel('Joint 1 (rad)')
+    subplot(3,1,2)
+    plot(t,q[:,2])
+    xlabel('Time (s)')
+    ylabel('Joint 2 (rad)')
+    subplot(3,1,3)
+    plot(t,q[:,3])
+    xlabel('Time (s)')
+    ylabel('Joint 3 (rad)')
+    show()
 pause % hit any key to continue
     
 # This joint space trajectory can now be animated
@@ -97,4 +97,4 @@ pause % hit any key to continue
 #pause % any key to continue
 '''
 
-    p.parsedemo(s);
+    p.parsedemo(s)

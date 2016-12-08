@@ -31,17 +31,17 @@
 
 function xd = fdyn2(t, x, flag, robot, torqfun, varargin)
 
-	n = robot.n;
+	n = robot.n
 
-	q = x(1:n);
-	qd = x(n+1:2*n);
+	q = x(1:n)
+	qd = x(n+1:2*n)
 
 	% evaluate the torque function if one is given
 	if isstr(torqfun)
-		tau = feval(torqfun, t, q, qd, varargin{:});
+		tau = feval(torqfun, t, q, qd, varargin{:})
 	else
-		tau = zeros(n,1);
+		tau = zeros(n,1)
 	end
 	
-	qdd = accel(robot, x(1:n,1), x(n+1:2*n,1), tau);
-	xd = [x(n+1:2*n,1); qdd];
+	qdd = accel(robot, x(1:n,1), x(n+1:2*n,1), tau)
+	xd = [x(n+1:2*n,1); qdd]

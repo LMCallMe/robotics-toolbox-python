@@ -6,7 +6,7 @@
 #
 # $Revision: 1.2 $
 
-import robot.parsedemo as p;
+import robot.parsedemo as p
 import sys
 
 print sys.modules
@@ -56,4 +56,4 @@ pause % any key to continue
 # which are quite different.
 '''
 
-    p.parsedemo(s);
+    p.parsedemo(s)

@@ -3,7 +3,7 @@
 from robot import *
 from robot.puma560 import *
 
-set_printoptions(precision=4, suppress=True);
+set_printoptions(precision=4, suppress=True)
 
 tests = '''
 (q,qd,qdd) = jtraj(qz, qr, 20)
@@ -25,15 +25,15 @@ t2 = troty(-0.3) * transl(-0.2, -0.3, 0.6)
 t2
 ctraj(t1, t2, 5)
 ctraj(t1, t2, arange(0, 1, 0.1))
-''';
+'''
 
 for line in tests.split('\n'):
     if line == '' or line[0] in '%#':
-        continue;
-    print '::', line;
+        continue
+    print '::', line
     if '=' in line:
-        exec line;
+        exec line
     else:
-        print eval(line);
+        print eval(line)
     print
 

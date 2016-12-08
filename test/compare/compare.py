@@ -19,33 +19,33 @@ The process:
    difference from the Matlab versions
 """
 
-from robot import *;
+from robot import *
 
 print "Compare Python and Matlab RNE implementations"
 
 # load the (q,qd,qdd) data
-path = loadtxt('path.dat');
+path = loadtxt('path.dat')
 
 # load the Matlab computed torques
-matlab_dh = loadtxt('puma560.dat');
+matlab_dh = loadtxt('puma560.dat')
 
 from robot.puma560 import *
 
-tau = rne(p560, path);
+tau = rne(p560, path)
 
-diff = matlab_dh - tau;
+diff = matlab_dh - tau
 #print diff
 print "RNE DH, error norm =", linalg.norm(diff, 'fro')
 
 #############
 
 # load the Matlab computed torques
-matlab_mdh = loadtxt('puma560m.dat');
+matlab_mdh = loadtxt('puma560m.dat')
 
 from robot.puma560akb import *
 
-tau = rne(p560m, path);
+tau = rne(p560m, path)
 
-diff = matlab_mdh - tau;
+diff = matlab_mdh - tau
 #print diff
 print "RNE MDH, error norm =", linalg.norm(diff, 'fro')

@@ -50,7 +50,7 @@ Constructor for quaternion objects:
     - q = quaternion(s, v)    from 4 elements
 '''
 
-        self.vec = [];
+        self.vec = []
         
         if len(args) == 0:
                 # default is a null rotation
@@ -69,51 +69,51 @@ Constructor for quaternion objects:
             if type(arg) is matrix:
                 # Q = QUATERNION(R) from a 3x3
                 if (arg.shape == (3,3)):
-                    self.tr2q(arg);
-                    return;
+                    self.tr2q(arg)
+                    return
 
                 # Q = QUATERNION(R) from a 4x4
                 if (arg.shape == (4,4)):
-                    self.tr2q(arg[0:3,0:3]);
-                    return;
+                    self.tr2q(arg[0:3,0:3])
+                    return
                     
             # some kind of list, vector, scalar...
             
-            v = arg2array(arg);
+            v = arg2array(arg)
             
             if len(v) == 4:
                 # Q = QUATERNION([s v1 v2 v3]) from 4 elements
-                self.s = v[0];
-                self.v = mat(v[1:4]);
+                self.s = v[0]
+                self.v = mat(v[1:4])
                 
             elif len(v) == 3:
                 self.s = 0
-                self.v = mat(v[0:3]);
+                self.v = mat(v[0:3])
 
             elif len(v) == 1:
                 # Q = QUATERNION(s) from a scalar
                 #Q = QUATERNION(s)               from a scalar
-                self.s = v[0];
+                self.s = v[0]
                 self.v = mat([0, 0, 0])
 
         elif len(args) == 2:
             # Q = QUATERNION(v, theta) from vector plus angle
-            # Q = quaternion(s, v);
+            # Q = quaternion(s, v)
 
-            a1 = arg2array(args[0]);
-            a2 = arg2array(args[1]);
+            a1 = arg2array(args[0])
+            a2 = arg2array(args[1])
             
             if len(a1) == 1 and len(a2) == 3:
                 # s, v
-                self.s = a1[0];
-                self.v = mat(a2);
+                self.s = a1[0]
+                self.v = mat(a2)
             elif len(a1) == 3 and len(a2) == 1:
                 # v, theta
-                self.s = a2[0];
-                self.v = mat(a1);
+                self.s = a2[0]
+                self.v = mat(a1)
 
         elif len(args) == 4:
-            self.s = args[0];
+            self.s = args[0]
             self.v = mat(args[1:4])
 
         else:
@@ -221,9 +221,9 @@ Constructor for quaternion objects:
         
             - q * q   quaternion multiplication
             - q * c   element-wise multiplication by constant
-            - q * v   quaternion-vector multiplication q * v * q.inv();
+            - q * v   quaternion-vector multiplication q * v * q.inv()
         '''
-        qr = quaternion();
+        qr = quaternion()
         
         if isinstance(q2, quaternion):
                 
@@ -247,9 +247,9 @@ Constructor for quaternion objects:
 
             if q2.shape == (1,3) or q2.shape == (3,1):
                     qr = self * quaternion(q2) * self.inv()
-                    return qr.v;
+                    return qr.v
             else:
-                    raise ValueError;
+                    raise ValueError
 
         else:
             qr.s = self.s * q2
@@ -288,10 +288,10 @@ Constructor for quaternion objects:
             self.v = s1*v2 + s2*v1 + cross(v1,v2)
 
         elif isscalar(x):
-            self.s *= x;
-            self.v *= x;
+            self.s *= x
+            self.v *= x
 
-        return self;
+        return self
 
 
     def __div__(self, q):
@@ -320,7 +320,7 @@ Constructor for quaternion objects:
             raise ValueError
         
         qr = quaternion()
-        q = quaternion(self);
+        q = quaternion(self)
         
         # multiply by itself so many times
         for i in range(0, abs(p)):
@@ -336,7 +336,7 @@ Constructor for quaternion objects:
         """
         Return a copy of the quaternion.
         """
-        return copy.copy(self);
+        return copy.copy(self)
                 
     def inv(self):
         """Return the inverse.
@@ -345,10 +345,10 @@ Constructor for quaternion objects:
         @return: the inverse
         """
         
-        qi = quaternion(self);
-        qi.v = -qi.v;
+        qi = quaternion(self)
+        qi.v = -qi.v
         
-        return qi;
+        return qi
 
 
 
@@ -402,7 +402,7 @@ Constructor for quaternion objects:
         @return: equivalent rotation matrix
         """
 
-        s = self.s;
+        s = self.s
         x = self.v[0,0]
         y = self.v[0,1]
         z = self.v[0,2]

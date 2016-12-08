@@ -3,7 +3,7 @@
 from robot import *
 from robot.puma560 import *
 
-set_printoptions(precision=4, suppress=True);
+set_printoptions(precision=4, suppress=True)
 
 tests = '''
 p560
@@ -18,15 +18,15 @@ jacobn(p560, qn)
 
 t = fkine(p560, qn)
 tr2jac(t)
-''';
+'''
 
 for line in tests.split('\n'):
     if line == '' or line[0] in '%#':
-        continue;
-    print '::', line;
+        continue
+    print '::', line
     if '=' in line:
-        exec line;
+        exec line
     else:
-        print eval(line);
+        print eval(line)
     print
 

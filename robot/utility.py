@@ -58,9 +58,9 @@ def numcols(m):
     
     @type m: matrix
     @return: the number of columns in the matrix.
-    return m.shape[1];
+    return m.shape[1]
     """
-    return m.shape[1];
+    return m.shape[1]
     
 def numrows(m):
     """
@@ -68,9 +68,9 @@ def numrows(m):
     
     @type m: matrix
     @return: the number of rows in the matrix.
-    return m.shape[1];
+    return m.shape[1]
     """
-    return m.shape[0];
+    return m.shape[0]
 
 ################ vector operations
 
@@ -119,9 +119,9 @@ def arg2array(arg):
             
             def func(*args):
                 if len(args) == 1:
-                    v = arg2array(arg[0]);
+                    v = arg2array(arg[0])
                 elif len(args) == 3:
-                    v = arg2array(args);
+                    v = arg2array(args)
              .
              .
              .
@@ -130,23 +130,23 @@ def arg2array(arg):
     @return: Array equivalent to C{arg}.
     """
     if isinstance(arg, (matrix, ndarray)):
-        s = arg.shape;
+        s = arg.shape
         if len(s) == 1:
-            return array(arg);
+            return array(arg)
         if min(s) == 1:
-            return array(arg).flatten();
+            return array(arg).flatten()
 
     elif isinstance(arg, list):
-        return array(arg);
+        return array(arg)
 
     elif isinstance(arg, (int, float, float32, float64)):
-        return array([arg]);
+        return array([arg])
         
-    raise ValueError;
+    raise ValueError
         
 
 
-import traceback;
+import traceback
 
 def error(s):
     """
@@ -155,7 +155,7 @@ def error(s):
     """
     print 'Robotics toolbox error:', s
 
-    #traceback.print_exc();
+    #traceback.print_exc()
     raise ValueError
     
     
@@ -164,8 +164,8 @@ if __name__ == "__main__":
     print arg2array(1.0); 
     print arg2array( mat([1,2,3,4]) )
     print arg2array( mat([1,2,3,4]).T )
-    print arg2array( array([1,2,3]) );
-    print arg2array( array([1,2,3]).T );
-    print arg2array( [1,2,3]);
+    print arg2array( array([1,2,3]) )
+    print arg2array( array([1,2,3]).T )
+    print arg2array( [1,2,3])
 
     

@@ -1,18 +1,18 @@
 from numpy import *
 from robot import *
 from pylab import *
-import textwrap;
-import traceback;
-import sys;
-import re;
+import textwrap
+import traceback
+import sys
+import re
 
 # we use termios to pretty up the continuation prompting, only available under Unix
-has_termios = False;
+has_termios = False
 try:
-    import termios;
-    has_termios = True;
+    import termios
+    has_termios = True
 except:
-    pass;
+    pass
     
 def parsedemo(s):
     """
@@ -29,11 +29,11 @@ def parsedemo(s):
     @param s: Demo string.
     """
     rstrip = re.compile(r'''\s*%.*$''')
-    lines = s.split('\n');
+    lines = s.split('\n')
     
-    name = __file__;
-    print name;
-    print len(name)*'=';
+    name = __file__
+    print name
+    print len(name)*'='
     if has_termios:
         fd = sys.stdin.fileno()
         old = termios.tcgetattr(fd)
@@ -43,62 +43,62 @@ def parsedemo(s):
         if has_termios:
             termios.tcsetattr(fd, termios.TCSADRAIN, new)
             
-        text = '';
+        text = ''
         for line in lines:
             if len(line) == 0:
-                print;
+                print
             elif line[0] == '#':
                 ## help text found, add it to the string
-                text += line[1:].lstrip() + '\n';
+                text += line[1:].lstrip() + '\n'
                 
                 # a blank line means paragraph break
                 if len(line) == 1 and text:
-                    print textwrap.fill(text, fix_sentence_endings=True);
-                    text = '';
+                    print textwrap.fill(text, fix_sentence_endings=True)
+                    text = ''
                     print  
             else:
                 ## command encountered
                 
                 # flush the remaining help text
                 if text:
-                    print textwrap.fill(text, fix_sentence_endings=True);
-                    text = '';
+                    print textwrap.fill(text, fix_sentence_endings=True)
+                    text = ''
                 
-                cmd = line.strip();
+                cmd = line.strip()
                 
                 # special case, pause prompts the user to continue
                 if cmd.startswith('pause'):
                     # prompt for continuation
                     sys.stderr.write('more? ')
-                    raw_input();
+                    raw_input()
                     
                     # remove the prompt from the screen
-                    sys.stderr.write('\r        \r');
-                    continue;
+                    sys.stderr.write('\r        \r')
+                    continue
                 print
                 
                 # show the command we are about to execute
-                print '>>>', cmd;
+                print '>>>', cmd
                 
                 # if it involves an assignment then we use exec else use eval.
                 # we mimic the matlab behaviour in which a trailing semicolon inhibits
                 # display of the result
                 try:
                     if cmd.startswith('from'):
-                        exec cmd;
+                        exec cmd
                     elif '=' in cmd:
-                        e = cmd.split('=');
-                        exec rstrip.sub('', cmd);
+                        e = cmd.split('=')
+                        exec rstrip.sub('', cmd)
                         if cmd[-1] != ';':
-                            print eval(e[0]);
+                            print eval(e[0])
                     else:
-                        result = eval(cmd.rstrip(';'));
+                        result = eval(cmd.rstrip(';'))
                         if cmd[-1] != ';':
-                            print result;
+                            print result
                 except:
                     print "Error at line <%s>" % cmd
-                    traceback.print_exc();
-                    sys.exit(1);
+                    traceback.print_exc()
+                    sys.exit(1)
 
     finally:
         if has_termios:

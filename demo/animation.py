@@ -12,7 +12,7 @@ clf
 # the overloaded function plot() animates a stick figure robot moving 
 # along a trajectory.
 
-    plot(p560, q);
+    plot(p560, q)
 # The drawn line segments do not necessarily correspond to robot links, but 
 # join the origins of sequential link coordinate frames.
 #
@@ -28,18 +28,18 @@ pause % any key to continue
 #
 # Let's make a clone of the Puma robot, but change its name and base location
 
-    p560_2 = p560;
-    p560_2.name = 'another Puma';
-    p560_2.base = transl(-0.5, 0.5, 0);
+    p560_2 = p560
+    p560_2.name = 'another Puma'
+    p560_2.base = transl(-0.5, 0.5, 0)
     hold on
-    plot(p560_2, q);
+    plot(p560_2, q)
 pause % any key to continue
 
 # We can also have multiple views of the same robot
     clf
-    plot(p560, qr);
+    plot(p560, qr)
     figure
-    plot(p560, qr);
+    plot(p560, qr)
     view(40,50)
     plot(p560, q)
 pause % any key to continue

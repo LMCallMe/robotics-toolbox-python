@@ -10,15 +10,15 @@ def trplot(r, name=''):
     '''
 
     if type(r) is matrix:
-        q = quaternion(r);
+        q = quaternion(r)
     elif isinstance(r, quaternion):
-        q = r;
+        q = r
     else:
-        raise ValueError;
+        raise ValueError
 
-    x = q * mat([1,0,0]);
-    y = q * mat([0,1,0]);
-    z = q * mat([0,0,1]);
+    x = q * mat([1,0,0])
+    y = q * mat([0,1,0])
+    z = q * mat([0,0,1])
 
     fig=p.figure()
     ax=p3.Axes3D(fig)
@@ -29,4 +29,4 @@ def trplot(r, name=''):
 
 if __name__ == "__main__":
     from robot.transform import *
-    trplot( rotx(0.2) );
+    trplot( rotx(0.2) )
