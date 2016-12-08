@@ -1,4 +1,4 @@
-import matplotlib.axes3d as p3
+import mpl_toolkits.mplot3d.axes3d as p3
 from numpy import * # for outer and arange
 import pylab as p   # for figure
 from robot.Quaternion import *
