@@ -1,3 +1,9 @@
+#Pycharm
+.idea
+# notebook
+.ipynb_checkpoints
+# my script
+*.bat
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
