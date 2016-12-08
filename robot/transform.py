@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- encoding: UTF-8 -*-
+
+
 """
 Primitive operations for 3x3 orthonormal and 4x4 homogeneous matrices.
 
@@ -166,6 +170,8 @@ def tr2eul(m):
                 euler[0,1] = arctan2(cp*m[0,2] + sp*m[1,2], m[2,2])
                 euler[0,2] = arctan2(-sp*m[0,0] + cp*m[1,0], -sp*m[0,1] + cp*m[1,1])
                 return euler
+        else:
+            print "not homog!"
             
     except ValueError:
         euler = []
@@ -439,8 +445,8 @@ def rotvec2r(theta, v):
     ct = cos(theta)
     st = sin(theta)
     vt = 1-ct
-    r = mat([[ct,         -v[2]*st,    v[1]*st],\
-             [v[2]*st,          ct,   -v[0]*st],\
+    r = mat([[ct,         -v[2]*st,    v[1]*st],
+             [v[2]*st,          ct,   -v[0]*st],
              [-v[1]*st,  v[0]*st,           ct]])
     return v*v.T*vt+r
 
@@ -460,6 +466,20 @@ def rotvec2tr(theta, v):
     """
     return r2t(rotvec2r(theta, v))
 
+def r2rotvec(r):
+    assert r.shape == (3,3)
+    th = arccos((trace(r) - 1)/2)
+    vx = r[2,1] - r[1,2]
+    vy = r[0,2] - r[2,0]
+    vz = r[1,0] - r[0,1]
+    v = mat([vx,vy,vz])
+    v = 0.5*v/sin(th)
+    return th, v
+
+def tr2rotvec(tr):
+    if ishomog(tr):
+        r = t2r(tr)
+        return r2rotvec(r)
 
 ###################################### translational transform
 
@@ -550,11 +570,11 @@ def skew(*args):
             return r
             
     elif len(args) == 3:
-            return ss(args);    
+            return ss(args)
     elif len(args) == 6:
             r = hstack( (ss(args[3:6]), mat(args[0:3]).T) )
             r = vstack( (r, mat([0, 0, 0, 1])) )
-            return r;    
+            return r
     else:
         raise ValueError
 
