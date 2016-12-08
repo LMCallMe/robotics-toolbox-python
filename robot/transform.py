@@ -14,6 +14,26 @@ from robot.utility import *
 from numpy.linalg import norm
 import robot.Quaternion as Q
 
+def se2(a, b=0, c=0, varargin="rad"):
+    """
+    P 22
+    which represents a translation of (a, b) and a rotation of c.
+    """
+    if isinstance(a,(list,ndarray)) and len(a) == 3:
+        x,y,th = a
+    else:
+        x,y,th = a,b,c
+
+    if varargin == "deg": th = deg2rad(th)
+    cth = cos(th)
+    sth = sin(th)
+    R = mat([[cth,-sth],
+            [sth,cth]])
+    t = eye(3)
+    t[:2,:2] = R
+    t[:2,2] = [x, y]
+    return t
+
 def rotx(theta):
     """
     Rotation about X-axis
