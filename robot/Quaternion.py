@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- encoding: UTF-8 -*-
+
 """
 Quaternion class.
 
@@ -118,7 +121,7 @@ Constructor for quaternion objects:
 
         else:
                 print "error"
-                return None
+                return
 
     def __repr__(self):
             return "%f <%f, %f, %f>" % (self.s, self.v[0,0], self.v[0,1], self.v[0,2])
@@ -278,7 +281,7 @@ Constructor for quaternion objects:
         '''
         
         if isinstance(x, quaternion):
-            s1 = self.s;   
+            s1 = self.s
             v1 = self.v
             s2 = x.s
             v2 = x.v
@@ -299,8 +302,8 @@ Constructor for quaternion objects:
             - q1 / q2      quaternion division implemented as q1 * q2.inv()
             - q1 / c       element-wise division
         '''
+        qr = quaternion()
         if isinstance(q, quaternion):
-            qr = quaternion()
             qr = self * q.inv()
         elif isscalar(q):
             qr.s = self.s / q
@@ -388,11 +391,10 @@ Constructor for quaternion objects:
 
     def tr(self):
         """Return an equivalent rotation matrix.
-        
+        注意, 四元素仅表示转动
         @rtype: 4x4 homogeneous transform
-        @return: equivalent rotation matrix
+        @return: homogeneous transform
         """
-
         return T.r2t( self.r() )
 
     def r(self):
@@ -449,7 +451,7 @@ Constructor for quaternion objects:
 
         if isscalar(r):
             if r<0 or r>1:
-                raise 'R out of range'
+                raise IndexError,'R out of range'
             if theta == 0:
                 q = quaternion(Q1)
             else:
