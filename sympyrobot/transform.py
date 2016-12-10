@@ -12,7 +12,8 @@ the authors is made.
 #from numpy import *
 import numpy as np
 from sympy import *
-from utility import *
+from utility import ishomog,numcols,error,numrows,arg2array,crossp
+from numpy import hstack,vstack
 mat = Matrix
 
 def rotx(theta):
@@ -471,8 +472,6 @@ def skew(*args):
             return r;    
     else:
         raise ValueError;
-
-
 
 def tr2diff(t1, t2):
     """

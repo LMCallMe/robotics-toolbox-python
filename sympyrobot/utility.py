@@ -131,19 +131,19 @@ def arg2array(arg):
     @rtype: array
     @return: Array equivalent to C{arg}.
     """
-    from numpy import matrix,ndarray,array,float32,float64
-    if isinstance(arg, (matrix, ndarray)):
-        s = arg.shape;
+    from numpy import ndarray,array,float32,float64
+    if isinstance(arg, (Matrix, ndarray)):
+        s = arg.shape
         if len(s) == 1:
-            return array(arg);
+            return array(arg)
         if min(s) == 1:
-            return array(arg).flatten();
+            return array(arg).flatten()
 
     elif isinstance(arg, list):
-        return array(arg);
+        return array(arg)
 
     elif isinstance(arg, (int, float, float32, float64)):
-        return array([arg]);
+        return array([arg])
         
     raise ValueError;
         

@@ -8,12 +8,10 @@ the authors is made.
 
 @author: Luis Fernando Lara Tobar and Peter Corke
 """
-
-from numpy import *
-from utility import *
-from transform import *
 import copy
-from Link import *
+from Link import Link
+from utility import ishomog,arg2array
+from sympy import *
 
 class Robot(object):
     """Robot object.
@@ -43,9 +41,9 @@ class Robot(object):
         if isinstance(arg, Robot):
             for k,v in arg.__dict__.items():
                 if k == "links":
-                    self.__dict__[k] = copy.copy(v);           
+                    self.__dict__[k] = copy.copy(v)
                 else:
-                    self.__dict__[k] = v;
+                    self.__dict__[k] = v
         elif arg is None:
             pass
         elif isinstance(arg[0], Link) and len(arg) > 1:
@@ -57,17 +55,17 @@ class Robot(object):
         if gravity != None:
             self.gravity = gravity
         else:
-            self.gravity = [0, 0, 9.81]
+            self.gravity = Matrix([0, 0, 9.81])
         
         if base != None:
             self.base = base
         else:
-            self.base = mat(eye(4,4))
+            self.base = Matrix.eye(4)
         
         if tool != None:
             self.tool = tool
         else:
-            self.tool = mat(eye(4,4))
+            self.tool = Matrix.eye(4)
 
         if manuf:
             self.manuf = manuf
@@ -82,7 +80,7 @@ class Robot(object):
         #self.lineopt = {'Color', 'black', 'Linewidth', 4}
         #self.shadowopt = {'Color', 'black', 'Linewidth', 1}
 
-        return None
+        return
 
     def __str__(self):
         s = 'ROBOT(%s, %s)' % (self.name, self.config())
@@ -99,10 +97,10 @@ class Robot(object):
         
         for link in self.links:
             s += str(link) + '\n'
-        return s;   
+        return s
 
     def __mul__(self, r2):
-        r = Robot(self);        # clone the robot
+        r = Robot(self)        # clone the robot
         print r
         r.links += r2.links
         return r
@@ -197,17 +195,24 @@ class Robot(object):
         elif name == "tool":
             if not ishomog(value):
                 raise ValueError, 'tool must be a homogeneous transform'
+            if not isinstance(value,Matrix):
+                value = Matrix(value)
             self.__dict__[name] = value
 
         elif name == "gravity":
-            v = arg2array(value)
-            if len(v) != 3:
+            if not isinstance(value,Matrix):
+                value = Matrix(value)
+
+            if not value.shape == (3,1):
                 raise ValueError, 'gravity must be a 3-vector'
-            self.__dict__[name] = mat(v).T
+
+            self.__dict__[name] = value
             
         elif name == "base":
             if not ishomog(value):
                 raise ValueError, 'base must be a homogeneous transform'
+            if not isinstance(value,Matrix):
+                value = Matrix(value)
             self.__dict__[name] = value
             
         else:

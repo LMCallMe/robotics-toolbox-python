@@ -13,6 +13,14 @@ use sympy
 # Import transformations section
 from transform import *
 
+from jacobian import *
+
+from kinematics import *
+
+from Link import *
+
+from Robot import *
+
 doc = """
 Robotics Toolbox for Python
 Based on Matlab Toolbox Version 7  April-2002

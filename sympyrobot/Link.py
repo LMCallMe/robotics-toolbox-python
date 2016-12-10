@@ -11,12 +11,11 @@ the authors is made.
 
 @author: Luis Fernando Lara Tobar and Peter Corke
 """
-
-from numpy import *
+import numpy as np
 from utility import *
+from sympy import *
 from transform import *
 import copy
-
 
 class Link:
     """
@@ -91,8 +90,6 @@ class Link:
         self.B = None
         self.Tc = None
         self.qlim = None
-
-        return None
 
     def __repr__(self):
 
@@ -179,7 +176,7 @@ class Link:
         @return: joint friction torque
         """
         tau = 0.0
-        if isinstance(qd, (ndarray, matrix)):
+        if isinstance(qd, (np.ndarray, Matrix)):
                 qd = qd.flatten().T
         if self.B == None:
             self.B = 0
@@ -202,7 +199,7 @@ class Link:
         
         l2 = self.copy()
 
-        l2.Tc = array([0, 0])
+        l2.Tc = np.array([0, 0])
         if all:
             l2.B = 0
         return l2
@@ -250,9 +247,7 @@ class Link:
             
         if name in self.fields:
             # scalar parameter
-            if isinstance(value, (ndarray,matrix)) and value.shape != (1,1):
-                raise ValueError, "Scalar required"
-            if not isinstance(value, (int,float,int32,float64)):
+            if not isinstance(value, (int,float,Symbol)):
                 raise ValueError
             self.__dict__[name] = value
 
@@ -264,7 +259,7 @@ class Link:
             self.__dict__[name] = mat(r)
             
         elif name == "I":
-            if isinstance(value, matrix) and value.shape == (3,3):
+            if isinstance(value, np.matrix) and value.shape == (3,3):
                 self.__dict__[name] = value
             else:
                 v = arg2array(value)
@@ -342,14 +337,14 @@ class Link:
 
         if self.convention == Link.LINK_DH:
             # standard
-            t =   mat([[ ct,    -st*ca, st*sa,  an*ct],
+            t =   Matrix([[ ct,    -st*ca, st*sa,  an*ct],
                     [st,    ct*ca,  -ct*sa, an*st],
                     [0, sa, ca, dn],
                     [0, 0,  0,  1]])
 
         else:
             # modified
-            t =   mat([[ ct,    -st,    0,  an],
+            t =   Matrix([[ ct,    -st,    0,  an],
                 [st*ca, ct*ca,  -sa,    -sa*dn],
                 [st*sa, ct*sa,  ca, ca*dn],
                 [0, 0,  0,  1]])
