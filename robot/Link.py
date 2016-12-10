@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- encoding: UTF-8 -*-
+
 """
 Link object.
 
@@ -326,13 +329,13 @@ class Link:
         """
         
         an = self.A
-        dn = self.D
-        theta = self.theta
+        dn = self.D # 初始的d值
+        theta = self.theta # 初始的theta值
 
         if self.sigma == 0:
-            theta = q   # revolute
+            theta += q   # revolute
         else:
-            dn = q      # prismatic
+            dn += q      # prismatic
 
         sa = sin(self.alpha); ca = cos(self.alpha)
         st = sin(theta); ct = cos(theta)

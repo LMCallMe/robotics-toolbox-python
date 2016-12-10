@@ -45,8 +45,10 @@ class Robot(object):
                 if k == "links":
                     self.__dict__[k] = copy.copy(v);           
                 else:
-                    self.__dict__[k] = v;           
-        elif len(arg) > 1 and isinstance(arg[0], Link):
+                    self.__dict__[k] = v;
+        elif arg is None:
+            pass
+        elif isinstance(arg[0], Link) and len(arg) > 1:
             self.links = arg
         else:
             raise AttributeError
@@ -90,9 +92,9 @@ class Robot(object):
         s = ''
         if self.name:
             s += 'name: %s\n' % (self.name)
-        if self.manuf:
+        if hasattr(self,"manuf"):
             s += 'manufacturer: %s\n' % (self.manuf)
-        if self.comment:
+        if hasattr(self,"comment"):
             s += 'commment: %s\n' % (self.comment)
         
         for link in self.links:
