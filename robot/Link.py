@@ -55,6 +55,8 @@ class Link:
     
     LINK_DH = 1
     LINK_MDH = 2
+    RJOINT = 3
+    PJOINT = 3
 
     def __init__(self, alpha=0, A=0, theta=0, D=0, sigma=0, convention=LINK_DH):
         """
@@ -101,7 +103,7 @@ class Link:
         else:
             conv = 'mod'
 
-        if self.sigma == 0:
+        if self.sigma == Link.RJOINT:
             jtype = 'R'
         else:
             jtype = 'P'

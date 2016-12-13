@@ -45,9 +45,15 @@ def fkine(robot, q):
     @param q: joint coordinate
     @see: L{Link}, L{Robot}, L{ikine}
     """
+    n = len(robot.links)
+    if isinstance(q,tuple) :
+        q = array(q)
+        q = q.reshape((1,n))
+    elif isinstance(q,ndarray) and len(q.shape) == 1:
+        q = q.reshape((1,n))
 
     q = mat(q)
-    n = robot.n
+
     if numrows(q)==1 and numcols(q)==n:
         t = robot.base
         for i in range(0,n):
@@ -161,10 +167,13 @@ def ikine(robot, tr, q0=None, m=None, **args):
             #dq = pinv(Jac.jacob0(robot, q.T)) * e
             dq = Jac.jacob0(robot, q.T).T * e
             q += gamma*dq
+            print
             nm = norm(e)
             count += 1
             if count > ilimit:
-                error("Solution wouldn't converge")
+                print "Solution wouldn't converge"
+                print count, 'iterations'
+                return None
         print count, 'iterations'
         return q
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- encoding: UTF-8 -*-
 """
 Robot object.
 
@@ -8,7 +10,8 @@ the authors is made.
 
 @author: Luis Fernando Lara Tobar and Peter Corke
 """
-
+import mpl_toolkits.mplot3d.axes3d as p3
+import pylab as p   # for figure
 from numpy import *
 from utility import *
 from transform import *
@@ -213,3 +216,40 @@ class Robot(object):
         else:
             raise AttributeError
 
+    def plot(self, q, fig=None, ax=None, show=True):
+        # TODO 绘制机器人三维图像
+        if fig is None: fig=p.figure()
+        if ax is None: ax=p3.Axes3D(fig)
+
+        def plotLine(p0,p1,c):
+            ax.plot3D([p0[0],p1[0]], [p0[1],p1[1]], [p0[2],p1[2]], color=c)
+
+        def plotTf(Tf,p0):
+            # TODO 绘制Tf的原点坐标
+            p0 = array(p0).flatten()
+            p1 = Tf[:3,3]
+            p1 = array(p1).flatten()
+            plotLine(p0,p1,'k') # 原点间连线为黑色
+            # TODO 绘制Tf的坐标轴,x,y,z 分别为红绿蓝
+            k = 20
+            x = Tf * matrix([k,0,0,1]).transpose()
+            y = Tf * matrix([0,k,0,1]).transpose()
+            z = Tf * matrix([0,0,k,1]).transpose()
+            plotLine(p1,x,'r')
+            plotLine(p1,y,'g')
+            plotLine(p1,z,'b')
+            return p1
+
+        p0 = [0,0,0]
+        Tf = eye(4)
+        p0 = plotTf(Tf,p0)
+        Tf = Tf*self.base
+        p0 = plotTf(Tf,p0)
+        for link,qx in zip(self.links,q):
+            Tf = Tf*link.tr(qx)
+            p0 = plotTf(Tf,p0)
+        Tf = Tf*self.tool
+        plotTf(Tf,p0)
+        if show:
+            fig.show()
+        return fig,ax
