@@ -36,8 +36,6 @@ def jacob0(robot, q):
     q = mat(q)
     Jn = jacobn(robot, q) # Jacobian from joint to wrist space
     #   convert to Jacobian in base coordinates
-    #      |R 0|
-    # J0 = |0 R| * Jn
     Tn = fkine(robot,q) # end-effector transformation
     R = t2r(Tn)
     return concatenate( ( concatenate( (R,zeros((3,3))) ,1) , concatenate( (zeros((3,3)),R) ,1) ))*Jn
@@ -68,8 +66,8 @@ def jacobn(robot, q):
     @see: L{jacobn}, L{diff2tr}, L{tr2diff}
     """
     q = arg2array(q)
-    n = robot.n
     L = robot.links
+    n = len(L)
     J = mat([[],[],[],[],[],[]])
     U = robot.tool
     for j in range(n-1,-1,-1):

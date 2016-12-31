@@ -214,7 +214,8 @@ class Robot(object):
             self.__dict__[name] = value
             
         else:
-            raise AttributeError
+            #raise AttributeError
+            self.__dict__[name] = value
 
     def plot(self, q, fig=None, ax=None, show=True):
         # TODO 绘制机器人三维图像
